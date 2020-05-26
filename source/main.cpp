@@ -2,6 +2,9 @@
  *  Reggie Dumper
  *  Copyright (C) 2012 AerialX, megazig
  *
+ *  Sounds Dumper
+ *  Copyright (C) 2020 JBMagination
+ *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
@@ -233,7 +236,7 @@ bool DumpFolder(const char* disc, string path)
 
 bool DumpMainDol(void)
 {
-	FILE *header_nfo = fopen("/reggie/header.bin", "wb");
+	FILE *header_nfo = fopen("/soundsdumper/header.bin", "wb");
 	if (!header_nfo)
 		return false;
 
@@ -275,10 +278,10 @@ bool DumpMainDol(void)
 		return false;
 	}
 
-	FILE *main_dol = fopen("/reggie/main.dol", "wb");
+	FILE *main_dol = fopen("/soundsdumper/main.dol", "wb");
 	if (!main_dol)
 	{
-		printf("Failed to open /reggie/main.dol for write\n");
+		printf("Failed to open /soundsdumper/main.dol for write\n");
 		free(dol);
 		return false;
 	}
@@ -312,6 +315,7 @@ int main(int argc, char **argv)
 
 	printf("\x1b[2;0H");
 	printf("Reggie's Dump v1.0\n\n");
+	printf("Sounds Dumper v1.0\n\n");
 	printf("Press Home at any time to exit.\n");
 
 	printf("Looking for SD/USB... ");
@@ -345,7 +349,7 @@ reinsert_disc:
 			HOME_EXIT();
 	}
 
-	printf("Press A to dump the bare minimum for Reggie! or B to dump the entire disc.\n");
+	printf("Press A to dump just the sounds or B to dump the entire disc.\n");
 	printf("Press 2 to dump entire disc and main.dol\n");
 	int select = -1;
 	while (select < 0) {
@@ -359,12 +363,12 @@ reinsert_disc:
 	}
 
 	printf("Dumping files off of the disc...\n");
-	mkdir("/reggie", 0777);
+	mkdir("/soundsdumper", 0777);
 
 	if (select == 2)
 		DumpMainDol();
 
-	if (!DumpFolder(select ? "/" : "/Stage", select ? "/reggie" : "/reggie/stage")) {
+	if (!DumpFolder(select ? "/" : "/Sounds", select ? "/soundsdumper" : "/soundsdumper/stage")) {
 		printf("\nThe files could not be read from disc. Press Home to exit, and try again.\n");
 		while (true)
 			HOME_EXIT();
@@ -373,7 +377,7 @@ reinsert_disc:
 	fatUnmount("sd:");
 	fatUnmount("usb:");
 
-	printf("\nWe're all done. Enjoy Reggie!\n");
+	printf("\nWe're all done. Enjoy the sounds!\n");
 	printf("Press Home to exit.\n\n\n");
 	while (true)
 		HOME_EXIT();
