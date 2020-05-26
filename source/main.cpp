@@ -368,7 +368,7 @@ reinsert_disc:
 	if (select == 2)
 		DumpMainDol();
 
-	if (!DumpFolder(select ? "/" : "/Sounds", select ? "/soundsdumper" : "/soundsdumper/stage")) {
+	if (!DumpFolder(select ? "/" : "/Sound", select ? "/soundsdumper" : "/soundsdumper/Sound")) {
 		printf("\nThe files could not be read from disc. Press Home to exit, and try again.\n");
 		while (true)
 			HOME_EXIT();
