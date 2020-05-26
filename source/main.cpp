@@ -314,7 +314,7 @@ int main(int argc, char **argv)
 	VIDEO_SetBlack(FALSE); VIDEO_Flush(); VIDEO_WaitVSync(); VIDEO_WaitVSync();
 
 	printf("\x1b[2;0H");
-	printf("Reggie's Dump v1.0\n\n");
+	printf("Reggie's Dump v1.1\n\n");
 	printf("Sounds Dumper v1.0\n\n");
 	printf("Press Home at any time to exit.\n");
 
